@@ -346,8 +346,6 @@ class MissionEditorFrame(wx.Frame):
             self.last_map_click_pos = event.get_arg("click_pos")
         elif event.get_type() == me_event.MEGE_SAVE_LAYOUT:
             from MAVProxy.modules.lib import win_layout
-            for name in win_layout.window_list:
-                print("Misseditor: " + name)
             wlayout = win_layout.get_wx_window_layout(self)
             win_layout.set_layout(wlayout, self.set_layout)
             #print("Name (missionEditorFrame): " + wlayout.name)
