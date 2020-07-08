@@ -60,6 +60,11 @@ def set_layout(wlayout, callback):
     if not wlayout.name in window_list and loaded_layout is not None and wlayout.name in loaded_layout:
         callback(loaded_layout[wlayout.name])
     window_list[wlayout.name] = ManagedWindow(wlayout, callback)
+    #print("Name (win_layout): " + window_list[wlayout.name].layout.name)
+    count = 0
+    for name in window_list:
+        count += 1
+    #print("Count: " + str(count))
     display_size = wlayout.dsize
     if pending_load:
         pending_load = False

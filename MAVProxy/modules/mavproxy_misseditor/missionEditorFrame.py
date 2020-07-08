@@ -344,6 +344,13 @@ class MissionEditorFrame(wx.Frame):
             self.text_ctrl_wp_default_alt.SetForegroundColour(wx.Colour(0, 0, 0))
         elif event.get_type() == me_event.MEGE_SET_LAST_MAP_CLICK_POS:
             self.last_map_click_pos = event.get_arg("click_pos")
+        elif event.get_type() == me_event.MEGE_SAVE_LAYOUT:
+            from MAVProxy.modules.lib import win_layout
+            for name in win_layout.window_list:
+                print("Misseditor: " + name)
+            wlayout = win_layout.get_wx_window_layout(self)
+            win_layout.set_layout(wlayout, self.set_layout)
+            #print("Name (missionEditorFrame): " + wlayout.name)
 
     def prep_new_row(self, row_num):
         command_choices = sorted(list(me_defines.miss_cmds.values()))
@@ -781,6 +788,9 @@ class MissionEditorFrame(wx.Frame):
             grad = format(grad, '.1f')
             self.grid_mission.SetCellValue(row, ME_DIST_COL, str(dist))
             self.grid_mission.SetCellValue(row, ME_ANGLE_COL, str(grad))
+
+    def set_layout(self, layout):
+        pass
 
 # end of class MissionEditorFrame
 if __name__ == "__main__":

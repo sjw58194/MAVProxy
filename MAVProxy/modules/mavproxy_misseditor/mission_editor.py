@@ -189,6 +189,9 @@ class MissionEditorMain(object):
     def mavlink_message_queue_handler(self):
         while not self.time_to_quit:
             while True:
+                self.event_thread.mp_misseditor.gui_event_queue_lock.acquire()
+                self.event_thread.mp_misseditor.gui_event_queue.put(MissionEditorEvent(me_event.MEGE_SAVE_LAYOUT))
+                self.event_thread.mp_misseditor.gui_event_queue_lock.release()
                 if self.time_to_quit:
                     return
                 if not self.mavlink_message_queue.empty():
